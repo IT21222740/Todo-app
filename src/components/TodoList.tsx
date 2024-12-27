@@ -1,34 +1,45 @@
-import { useState } from "react";
 import DeleteButton from "./DeleteButton";
+import { Todo } from "../App";
 
-function TodoList() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "buy groceries", completed: false },
-    { id: 2, text: "do laundry", completed: false },
-    { id: 3, text: "clean the house", completed: false },
-  ]);
+type TodoListProps = {
+  todos: Todo[];
+  handleToggleTodoItem: (todo: {
+    id: number;
+    text: string;
+    completed: boolean;
+  }) => void;
+  handleDeleteTodoItem: (id: number) => void;
+};
+
+function TodoList({
+  todos,
+  handleToggleTodoItem,
+  handleDeleteTodoItem,
+}: TodoListProps) {
   return (
     <ul>
+      {todos.length === 0 && (
+        <li className="h-full flex justify-center items-center font-semibold ">
+          Start by Adding a todo
+        </li>
+      )}
       {todos.map((todo) => (
         <li
+          onClick={() => handleToggleTodoItem(todo)}
           key={todo.id}
           className="flex justify-between items-center px-8 h-[50px] test-[14px] border-black/[8%] border cursor-pointer "
         >
           <span
-            onClick={() =>
-              setTodos(
-                todos.map((t) =>
-                  t.id === todo.id ? { ...t, completed: !t.completed } : t
-                )
-              )
-            }
             className={`${
               todo.completed ? "line line-through text-[#ccc]" : ""
             } `}
           >
             {todo.text}
           </span>{" "}
-          <DeleteButton id={todo.id} setTodos={setTodos} />
+          <DeleteButton
+            id={todo.id}
+            handleDeleteTodoItem={handleDeleteTodoItem}
+          />
         </li>
       ))}
     </ul>

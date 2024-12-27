@@ -1,7 +1,12 @@
-export default function Counter() {
+import { Todo } from "../App";
+type CounterProps = {
+  todos: Todo[];
+};
+export default function Counter({ todos }: CounterProps) {
+  const completedTodos = todos.filter((todo) => todo.completed).length;
   return (
     <p>
-      <b>0</b> /0 todos completed
+      <b>{completedTodos}</b> /{todos.length} todos completed
     </p>
   );
 }
