@@ -4,12 +4,8 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import TodoList from "./components/TodoList";
 import { useState } from "react";
+import { Todo } from "./lib/types";
 
-export type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
 function App() {
   //state
   const [todos, setTodos] = useState<Todo[]>([]);
