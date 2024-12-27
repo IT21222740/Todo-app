@@ -11,14 +11,20 @@ export type Todo = {
   completed: boolean;
 };
 function App() {
+  //state
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  //derived state
+  const totalNumberOfTodos: number = todos.length;
+  const completedTodos: number = todos.filter((todo) => todo.completed).length;
+
+  //event handlers/ actions
   const handleAddTodoItem = (todoItem: string) => {
     if (todoItem.trim() === "") {
       alert("Please enter a todo item");
       return;
     }
-    if (todos.length >= 3) {
+    if (todos.length >= 13) {
       alert("You can only add 3 todos at a time");
       return;
     }
@@ -47,7 +53,10 @@ function App() {
         className="relative w-[972px] h-[636px] bg-white rounded-[8px] shadow-lg grid grid-cols-[7fr_4fr] grid-rows-[59px_1fr] overflow-hidden"
         grid-cols
       >
-        <Header todos={todos} />
+        <Header
+          completedTodos={completedTodos}
+          totalNumberOfTodos={totalNumberOfTodos}
+        />
         <TodoList
           todos={todos}
           handleToggleTodoItem={handleToggleTodoItem}

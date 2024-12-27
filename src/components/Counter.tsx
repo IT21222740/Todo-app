@@ -1,12 +1,14 @@
-import { Todo } from "../App";
 type CounterProps = {
-  todos: Todo[];
+  totalNumberOfTodos: number;
+  completedTodos: number;
 };
-export default function Counter({ todos }: CounterProps) {
-  const completedTodos = todos.filter((todo) => todo.completed).length;
+export default function Counter({
+  totalNumberOfTodos,
+  completedTodos,
+}: CounterProps) {
   return (
     <p>
-      <b>{completedTodos}</b> /{todos.length} todos completed
+      <b>{completedTodos}</b> /{totalNumberOfTodos} todos completed
     </p>
   );
 }
