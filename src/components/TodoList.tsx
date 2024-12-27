@@ -1,21 +1,9 @@
 import DeleteButton from "./DeleteButton";
-import { Todo } from "../lib/types";
+import { useTodoContext } from "../lib/hooks";
 
-type TodoListProps = {
-  todos: Todo[];
-  handleToggleTodoItem: (todo: {
-    id: number;
-    text: string;
-    completed: boolean;
-  }) => void;
-  handleDeleteTodoItem: (id: number) => void;
-};
-
-function TodoList({
-  todos,
-  handleToggleTodoItem,
-  handleDeleteTodoItem,
-}: TodoListProps) {
+function TodoList() {
+  const { todos, handleToggleTodoItem, handleDeleteTodoItem } =
+    useTodoContext();
   return (
     <ul>
       {todos.length === 0 && (

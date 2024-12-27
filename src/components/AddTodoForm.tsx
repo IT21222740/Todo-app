@@ -1,12 +1,10 @@
 import Button from "./Button";
 import { useState } from "react";
+import { useTodoContext } from "../lib/hooks";
 
-type AddTodoFormProps = {
-  handleAddTodoItem: (todoItem: string) => void;
-};
-
-export default function AddTodoForm({ handleAddTodoItem }: AddTodoFormProps) {
+export default function AddTodoForm() {
   const [toodItem, setTodoItem] = useState("");
+  const { handleAddTodoItem } = useTodoContext();
 
   const addTodoItem = (e: React.FormEvent) => {
     e.preventDefault();
